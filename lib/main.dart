@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase/authentication/login_page.dart';
 
-import 'firebase/cloud_firebase/page_firebase_app.dart';
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -18,7 +20,8 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: const FirebaseApp(),
+      debugShowCheckedModeBanner: false,
+      home: const LoginPage(),
     );
   }
 }

@@ -2,10 +2,13 @@
 
 import 'package:firebase_1/firebase/cloud_firebase/firebase_data.dart';
 import 'package:firebase_1/firebase/cloud_firebase/page_detail.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:firebase_1/helpers/dialog.dart';
+
+import '../authentication/login_page.dart';
 
 class PageHomeFirebase extends StatefulWidget {
   const PageHomeFirebase({Key? key}) : super(key: key);
@@ -84,7 +87,29 @@ class _PageHomeFirebaseState extends State<PageHomeFirebase> {
             }
           }
         },
-      )
+      ),
+      drawer: Drawer(
+        child: Container(
+          child: Column(
+            children: [
+              Text('My firebase app'),
+              ElevatedButton(onPressed: (){
+                FirebaseAuth.instance.signOut().whenComplete((){
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => const LoginPage(),)
+                  , (route) => false);
+                });
+              },
+                  child: Row(
+                    children: const [
+                      Icon(Icons.logout),
+                      Text('Sign out')
+                    ],
+                  ))
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
