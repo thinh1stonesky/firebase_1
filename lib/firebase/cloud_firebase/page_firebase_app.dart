@@ -15,6 +15,7 @@ class _FirebaseAppState extends State<FirebaseApp> {
   bool ketNoi = false;
 
 
+
   @override
   Widget build(BuildContext context) {
     if(loi) {
@@ -56,6 +57,7 @@ class _FirebaseAppState extends State<FirebaseApp> {
         ketNoi = true;
       });
     }catch(e){
+      print(e);
       setState(() {
          loi = true;
       });
