@@ -94,11 +94,21 @@ class _PageHomeFirebaseState extends State<PageHomeFirebase> {
             children: [
               Text('My firebase app'),
               ElevatedButton(onPressed: (){
+                print('--------------------------------------------');
+                print(FirebaseAuth.instance.currentUser?.email);
                 FirebaseAuth.instance.signOut().whenComplete((){
+                  print("đăng xuất thành công");
                   Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(builder: (context) => const LoginPage(),)
                   , (route) => false);
+                  print('--------------------------------------------');
+                  print(FirebaseAuth.instance.currentUser?.email);
+                })
+                    .catchError((e){
+                  print('--------------------------------------------');
+                  print(e);
                 });
+
               },
                   child: Row(
                     children: const [
